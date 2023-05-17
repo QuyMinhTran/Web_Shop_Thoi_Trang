@@ -1,0 +1,66 @@
+﻿@model IEnumerable<WebBanHang.Models.Category>
+@{
+    ViewBag.Title = "Search";
+
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<div class="content-wrapper">
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <br />
+                <h2>Category</h2>
+
+
+                <hr />
+                <br />
+                <br />
+
+
+
+
+                <form asp-action="Search" method="post">
+                    <input type="text" name="searchTerm" />
+                    <button class="btn btn-success" type="submit"><i class="fa fa-search"></i></button>
+                </form>
+
+                <br />
+                <div class="panel-body" style="width:100%;height:500px;overflow:auto;">
+                    <div class="table-responsive table-bordered">
+                        <table class="table">
+                            <thead>
+                                <tr>         <th>#</th>
+                                            <th>Tên loại sản phẩm</th>
+                                            <th>Hiển thị trang Home</th>
+                                            <th>Chức năng</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    
+                                    <tr>
+                                        <td>@item.Id</td>
+                                        <td>@item.Category_Name</td>
+                                        <td>@item.ShowOnHomePage</td>
+
+                                        <td>
+                                            <a href="@Url.Action("Edit", "Category", new { id = item.Id })"><i class="fa fa-pencil fa-fw" style="color:black"></i></a>
+                                            <a href="@Url.Action("Details", "Category", new { id = item.Id })"><i class="fa fa-list-alt fa-fw"></i></a>
+                                            <a onclick="return confirm('Bạn có chắc chắn muốn xoá sản phẩm này?')" href="@Url.Action("Delete", "Category", new { id = item.Id })"><i class="fa fa-times fa-fw" style="color:red"></i></a>
+                                        </td>
+                                    </tr>
+
+                                    
+                                }
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+

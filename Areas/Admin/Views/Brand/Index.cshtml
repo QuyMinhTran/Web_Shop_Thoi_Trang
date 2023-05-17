@@ -1,0 +1,78 @@
+﻿@model IEnumerable<WebBanHang.Models.Brand>
+@{
+    ViewBag.Title = "brand";
+}
+
+<div class="content-wrapper">
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <br />
+                <h2>Brand</h2>
+
+                <div class="text-warning">
+                    @ViewBag.ProError
+                </div>
+                <hr />
+                <br />
+                <br />
+
+                <div style="width:100%;height:500px;overflow:auto; margin:0 auto;">
+                    <div class="panel panel-default">
+                        <div class="panel-heading">
+                            <a class="btn btn-primary btn-default" href="@Url.Action("Create", "Brand")" role="button">Tạo mới thương hiệu</a><br />
+                            <div class="form-group input-group navbar-right">
+                                @using (Ajax.BeginForm("Search", "Brand", new AjaxOptions { InsertionMode = InsertionMode.Replace, HttpMethod = "Post" }))
+                                {
+                                    <input type="text" name="searchTerm" class="form-control" style="width:300px" placeholder="Nhập tên thương hiệu sản phẩm..." />
+                                    <button class="btn btn-success" type="submit">
+                                        <i class="fa fa-search"></i>
+                                    </button>
+                                }
+                            </div>
+                        </div>
+                        <div class="panel-body" style="width:100%;height:500px;overflow:auto;">
+                            <div class="table-responsive table-bordered">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>#</th>
+                                            <th>Tên thương hiệu</th>
+                                            <th>Hình ảnh</th>
+                                            <th>Hiển thị trang Home </th>
+                                             <th>Chức năng</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var item in Model)
+                                        {
+                                        <tr>
+                                            <td>@item.ID</td>
+                                            <td>@item.Brand_Name</td>
+                                            <td><img src="@item.Avatar" width="50" height="50" /></td>
+                                            <td>@item.ShowOnHomePage</td>
+                                            
+                                            
+
+                                            <td>
+                                                <a href="@Url.Action("Edit", "Brand", new { id = item.ID })"><i class="fa fa-pencil fa-fw" style="color:black"></i></a>
+                                                <a href="@Url.Action("Details", "Brand", new { id = item.ID })"><i class="fa fa-list-alt fa-fw"></i></a>
+                                                <a onclick="return confirm('Bạn có chắc chắn muốn xoá sản phẩm này?')" href="@Url.Action("Delete", "Brand", new { id = item.ID })"><i class="fa fa-times fa-fw" style="color:red"></i></a>
+                                            </td>
+                                        </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </div>
+
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+</div>
+
+

@@ -1,0 +1,295 @@
+﻿@model List<WebBanHang.Models.Product>
+
+
+@{
+    ViewBag.Title = "ProductBrand";
+}
+
+
+
+<section class="section-content padding-y">
+    <div class="container">
+
+
+
+        <div class="card mb-3">
+            <div class="card-body">
+                <ol class="breadcrumb float-left">
+                    <li class="breadcrumb-item"><a href="~/Home/Index">Trang chủ</a></li>
+
+                </ol>
+            </div>
+           
+        </div>
+
+
+
+        <div class="row">
+            <aside class="col-md-2">
+
+                <article class="filter-group">
+                    <h6 class="title">
+                        <a href="#" class="dropdown-toggle" data-toggle="collapse" data-target="#collapse_1">Loại sản phẩm </a>
+                    </h6>
+                    <div class="filter-content collapse show" id="collapse_1" style="">
+                        <div class="inner">
+                            <ul class="list-menu">
+
+                                <li><a href="~/Category/ProductCategory/0">Áo khoác </a></li>
+                                <li><a href="~/Category/ProductCategory/1">Áo thun  </a></li>
+                                <li><a href="~/Category/ProductCategory/2">Giày  </a></li>
+                                <li><a href="~/Category/ProductCategory/3">Quần</a></li>
+
+
+                            </ul>
+                        </div>
+                    </div>
+                </article>
+                <article class="filter-group">
+                    <h6 class="title">
+                        <a href="#" class="dropdown-toggle" data-toggle="collapse" data-target="#collapse_2"> Nhãn hiệu </a>
+                    </h6>
+                    <div class="filter-content collapse show" id="collapse_2">
+                        <div class="inner">
+                            <label class="custom-control custom-checkbox">
+                                <input type="checkbox" checked="" class="custom-control-input">
+                                <div class="custom-control-label">
+                                    <a class="nav-link" href="~/Brand/ProductBrand/1">Adidas</a>
+                                    <b class="badge badge-pill badge-light float-right">120</b>
+                                </div>
+                            </label>
+                            <label class="custom-control custom-checkbox">
+                                <input type="checkbox" checked="" class="custom-control-input">
+                                <div class="custom-control-label">
+                                    <a class="nav-link" href="~/Brand/ProductBrand/2">MLB</a>
+                                    <b class="badge badge-pill badge-light float-right">15</b>
+                                </div>
+                            </label>
+                            <label class="custom-control custom-checkbox">
+                                <input type="checkbox" checked="" class="custom-control-input">
+                                <div class="custom-control-label">
+                                    <a class="nav-link" href="~/Brand/ProductBrand/3">Nike</a>
+                                    <b class="badge badge-pill badge-light float-right">35</b>
+                                </div>
+                            </label>
+
+                        </div>
+                    </div>
+                </article>
+                <article class="filter-group">
+                    <h6 class="title">
+                        <a href="#" class="dropdown-toggle" data-toggle="collapse" data-target="#collapse_3"> Giá </a>
+                    </h6>
+                    <div class="filter-content collapse show" id="collapse_3">
+                        <div class="inner">
+                            <input type="range" class="custom-range" min="0" max="100" name="">
+                            <div class="form-row">
+                                <div class="form-group col-md-6">
+                                    <label for="minPrice">Min</label>
+                                    <input class="form-control" placeholder="0₫" type="number" name="minPrice">
+                                </div>
+                                <div class="form-group text-right col-md-6">
+                                    <label  for="maxPrice">Max</label>
+                                    <input class="form-control" placeholder="10.000.000₫" type="number" name="maxPrice">
+                                </div>
+                            </div>
+                            <a href="~/Product/Search/"><button class="btn btn-block btn-primary">Áp dụng</button></a>
+                        </div>
+                    </div>
+                </article>
+                <article class="filter-group">
+                    <h6 class="title">
+                        <a href="#" class="dropdown-toggle" data-toggle="collapse" data-target="#collapse_4"> Kích thước </a>
+                    </h6>
+                    <div class="filter-content collapse show" id="collapse_4">
+                        <div class="inner">
+                            <label class="checkbox-btn">
+                                <input type="checkbox">
+                                <span class="btn btn-light"> XS </span>
+                            </label>
+
+                            <label class="checkbox-btn">
+                                <input type="checkbox">
+                                <span class="btn btn-light"> SM </span>
+                            </label>
+
+                            <label class="checkbox-btn">
+                                <input type="checkbox">
+                                <span class="btn btn-light"> LG </span>
+                            </label>
+
+                            <label class="checkbox-btn">
+                                <input type="checkbox">
+                                <span class="btn btn-light"> XXL </span>
+                            </label>
+                        </div>
+                    </div>
+                </article>
+                <article class="filter-group">
+                    <h6 class="title">
+                        <a href="#" class="dropdown-toggle" data-toggle="collapse" data-target="#collapse_5"> Tình trạng </a>
+                    </h6>
+                    <div class="filter-content collapse show" id="collapse_5">
+                        <div class="inner">
+                            <label class="custom-control custom-radio">
+                                <input type="radio" name="myfilter_radio" checked="" class="custom-control-input">
+                                <div class="custom-control-label">Bất cứ tình trạng nào</div>
+                            </label>
+
+                            <label class="custom-control custom-radio">
+                                <input type="radio" name="myfilter_radio" class="custom-control-input">
+                                <div class="custom-control-label">Mới </div>
+                            </label>
+
+                            <label class="custom-control custom-radio">
+                                <input type="radio" name="myfilter_radio" class="custom-control-input">
+                                <div class="custom-control-label">Hàng đã qua sử dụng</div>
+                            </label>
+
+                        </div>
+                    </div>
+                </article>
+
+            </aside>
+            <main class="col-md-10">
+
+
+                <header class="mb-3">
+                    <div class="form-inline">
+                        <strong class="mr-md-auto">Các mặt hàng được tìm thấy (32) </strong>
+                        <select class="mr-2 form-control">
+                            <option>Mặt hàng mới nhất</option>
+                            <option>Xu hướng</option>
+                            <option>Phổ biến nhất</option>
+                            <option>Giá thấp nhất</option>
+                        </select>
+                        <div class="btn-group">
+                            <a href="~/Listing/Grid" class="btn btn-light" data-toggle="tooltip" title="List view">
+                                <i class="fa fa-bars"></i>
+                            </a>
+                            <a href="~/Category/ProductCategory" class="btn btn-light active" data-toggle="tooltip" title="Grid view">
+                                <i class="fa fa-th"></i>
+                            </a>
+                        </div>
+                    </div>
+                </header>
+                @foreach (var m in Model)
+                {
+                    <article class="card card-product-list">
+                        <div class="row no-gutters">
+                            <aside class="col-md-3">
+                                <a href="@Url.Action("Detail", "Product", new { id = m.Id})" class="img-wrap">
+                                    <span class="badge badge-danger"> Mới </span>
+                                    <img src="@m.Avartar" width="50%" height="100">
+                                </a>
+                            </aside>
+                            <div class="col-md-6">
+                                <div class="info-main">
+                                    <a href="@Url.Action("Detail", "Product", new { id = m.Id})" class="img-wrap; h5 title"> @m.Name</a>
+                                    <div class="rating-wrap mb-2">
+                                        <ul class="rating-stars">
+                                            <li style="width:100%" class="stars-active">
+                                                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </li>
+                                            <li>
+                                                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i> <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                            </li>
+                                        </ul>
+                                        <div class="label-rating">9/10</div>
+                                    </div>
+
+                                    <p class="mb-3">
+                                        <span class="tag"> <i class="fa fa-check"></i> Đã xác minh</span>
+                                        <span class="tag"> 2 năm  </span>
+                                        <span class="tag"> 23 lượt đánh giá </span>
+                                        <span class="tag"> Mỹ</span>
+                                    </p>
+
+                                    <p>
+                                        @m.ShortDes
+                                    </p>
+
+                                </div>
+                            </div>
+                            <aside class="col-sm-3">
+                                <div class="info-aside">
+                                    <div class="price-wrap">
+                                        <span class="h5 price">@m.Price</span>
+                                        <small class="text-muted">/1 sản phẩm</small>
+                                    </div>
+                                    <small class="text-success">Miễn phí vận chuyển</small>
+
+                                    <p class="text-muted mt-3">CÔNG TY TNHH SNEAKER ALISTYLE</p>
+                                    <p class="mt-3"  style=" display:flex ; justify-content: space-around">
+                                        <a href="#" class="btn btn-outline-primary"> <i class="fa fa-envelope"></i>  Liên hệ </a>
+                                        <a href="#" class="btn btn-light"><i class="fa fa-heart"></i> Yêu thích </a>
+                                    </p>
+
+                                    <label class="custom-control mt-3 custom-checkbox">
+                                        <input type="checkbox" class="custom-control-input">
+                                        <div class="custom-control-label">
+                                            So sánh
+                                        </div>
+                                    </label>
+
+                                </div>
+                            </aside>
+                        </div>
+                    </article>
+                }
+
+
+                <nav class="mb-4" aria-label="Page navigation sample">
+                    <ul class="pagination">
+                        <li class="page-item disabled"><a class="page-link" href="#">Trước </a></li>
+                        <li class="page-item active"><a class="page-link" href="#">1</a></li>
+                        <li class="page-item"><a class="page-link" href="#">2</a></li>
+                        <li class="page-item"><a class="page-link" href="#">3</a></li>
+                        <li class="page-item"><a class="page-link" href="#">4</a></li>
+                        <li class="page-item"><a class="page-link" href="#">5</a></li>
+                        <li class="page-item"><a class="page-link" href="#">Sau</a></li>
+                    </ul>
+                </nav>
+
+
+                <div class="box text-center">
+                    <p>Bạn đã tìm thấy những gì bạn đang tìm kiếm？</p>
+                    <a href="" class="btn btn-light">Yes</a>
+                    <a href="" class="btn btn-light">No</a>
+                </div>
+
+
+            </main>
+
+        </div>
+
+    </div>
+</section>
+
+<section class="padding-y-lg bg-light border-top">
+    <div class="container">
+
+        <p class="pb-2 text-center">Cung cấp các sản phẩm và tin tức về sản phẩm mới vào hộp thư đến của bạn.</p>
+
+        <div class="row justify-content-md-center">
+            <div class="col-lg-4 col-sm-6">
+                <form class="form-row">
+                    <div class="col-8">
+                        <input class="form-control" placeholder=" Email của bạn" type="email">
+                    </div>
+                    <div class="col-4">
+                        <button type="submit" class="btn btn-block btn-warning"> <i class="fa fa-envelope"></i> Gửi </button>
+                    </div>
+                </form>
+                <small class="form-text">Chúng tôi sẽ không bao giờ chia sẻ địa chỉ email của bạn với người khác. </small>
+            </div>
+        </div>
+
+
+    </div>
+</section>
+

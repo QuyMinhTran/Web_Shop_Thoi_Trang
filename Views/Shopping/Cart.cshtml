@@ -1,0 +1,254 @@
+﻿@model IEnumerable<WebBanHang.Models.CartModel>
+@{
+    ViewBag.Title = "Cart";
+}
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.3/jquery.min.js"></script>
+<script type="text/javascript">
+    $(function () {
+        $("#removecart").click(function () {
+            var model = {};
+            //lấy id sản phẩm
+            model.Id = $("#ProductId").val;
+            debugger;
+                 $.ajax({
+                type: "POST",
+                url: '@Url.Action("Remove", "Shopping")',
+                data:  JSON.stringify(model) ,
+                dataType: "json",
+                contentType: "application/json; charset=utf-8",
+                success: function () {
+                    alert("Xóa sản phẩm thành công!");
+                    $('#CartCount').text(@Session["count"] - 1);
+                    $("#Product -" + model.Id ).remove();
+                },
+                error: function () {
+                    alert("Lỗi trong khi xóa sản phẩm!");
+                }
+            });
+            return false;
+        });
+    });
+</script>
+<section class="section-content padding-y">
+    <div class="container">
+
+        <div class="row">
+            <main class="col-md-9">
+                <div class="card">
+
+                    <table class="table table-borderless table-shopping-cart">
+                        <thead class="text-muted">
+                            <tr class="small text-uppercase">
+                                <th scope="col">Sản phẩm</th>
+                                <th scope="col" width="120">Số lượng</th>
+                                <th scope="col" width="120">Giá  </th>
+                                <th scope="col" class="text-right" width="200"> </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (Model != null  )
+                            {
+                              
+
+
+                                foreach (var item in Model)
+                                {
+                                   
+                                <tr id=" product-@item.Product.Id">
+                                  
+                                    <td>
+                                        <figure class="itemside">
+                                            <div class="aside"><img src="@item.Product.Avartar" @*width="100wh"*@ class="img-sm"></div>
+                                            <figcaption class="info">
+                                                <a href="#" class="title text-dark">@item.Product.Name</a>
+                                                <p class="text-muted small">@item.Product.ShortDes</p>
+                                            </figcaption>
+                                        </figure>
+                                    </td>
+                                  
+                              
+                                    <td>
+                                       <input type="number" value="@item.Quantity" />
+                                    </td>
+                                    
+                                    <td>
+                                        <div class="price-wrap">
+                                            <var class="price">@item.Product.Price</var>
+                                            <small class="text-muted"> Miễn phí vận chuyển  </small>
+                                        </div>
+                                    </td>
+                                    <td class="text-right">
+                                        <input type="hidden" value="@item.Product.Id" id="productid" />
+                                        <a href="#" class="btn btn-danger btn-sm">Lưu vào yêu thích </a><br /><br />
+                                        @*<a href="#" class="btn btn-light" id="removecart">
+                                            Xóa
+                                        </a>*@
+                                        <a onclick="return confirm('Bạn có chắc chắn muốn xoá sản phẩm này?')" href="@Url.Action("Delete", "Shopping", new { id = item.Product.Id })"><i class="fa fa-times fa-fw" style="color:red"></i>Xóa</a>
+                                    </td>
+                                </tr>
+
+                              
+                                }
+                              
+                                
+                             }
+                                else
+                                {
+                                  <p>Không có sản phẩm trong giỏ hàng </p>  
+                                }
+                           
+
+
+                        </tbody>
+                    </table>
+
+                    <div class="card-body border-top">
+                        <a href="~/Payment/Index" class="btn btn-primary float-md-right"> Mua hàng <i class="fa fa-chevron-right"></i> </a>
+                        <a href="~/Home/Index" class="btn btn-light"> <i class="fa fa-chevron-left"></i> Tiếp tục mua sắm </a>
+                    </div>
+                </div> 
+
+                <div class="alert alert-success mt-3">
+                    <p class="icontext"><i class="icon text-success fa fa-truck"></i>Giao hàng miễn phí trong vòng 1-2 tuần</p>
+                </div>
+
+            </main> 
+            <aside class="col-md-3">
+                <div class="card mb-3">
+                    <div class="card-body">
+                        <form>
+                            <div class="form-group">
+                                <label>Phiếu giảm giá?</label>
+                                <div class="input-group">
+                                    <input type="text" class="form-control" name="" placeholder="Mã giảm giá">
+                                    <span class="input-group-append">
+                                        <button class="btn btn-primary">Sử dụng</button>
+                                    </span>
+                                </div>
+                            </div>
+                        </form>
+                    </div> 
+                </div>  
+                <div class="card">
+                    <div class="card-body">
+                        <dl class="dlist-align">
+                            <dt>Tổng tiền:</dt>
+                            <dd class="text-right"></dd>
+                        </dl>
+                        <dl class="dlist-align">
+                            <dt>Giảm giá:</dt>
+                            <dd class="text-right">10%</dd>
+                        </dl>
+                        <dl class="dlist-align">
+                            <dt>Tổng:</dt>
+                            <dd class="text-right  h5"><strong>4.112.100₫</strong></dd>
+                        </dl>
+                        <hr>
+                        <p class="text-center mb-3">
+                            <img src="~/Content/images/misc/payments.png" height="26">
+                        </p>
+
+                    </div> 
+                </div>  
+            </aside> 
+        </div>
+
+    </div> 
+</section>
+
+<section class="section-name border-top padding-y">
+    <div class="container">
+        <h6>Chính sách thanh toán</h6>
+        <p>
+            I – Quy định chung
+            Mục đích: thông báo về các hình thức thanh toán của website alistyle.vn đang áp dụng
+            Phạm vi áp dụng: dành cho tất cả các khách hàng mua sắm tại website alistyle.vn<br />
+                                                                                           <br />
+        II – Nội dung quy định
+            Nhằm mang đến trải nghiệm mua sắm toàn diện cho quý khách hàng, alistyle.vn đưa ra các hình thức thanh toán tiện lợi như sau:
+            <br />
+            Chuyển khoản ngân hàng, ví điện tử<br />
+            Thanh toán khi nhận hàng (COD)<br />
+            Thanh toán qua Paypal<br />
+            Mua trước trả sau qua Fundiin<br />
+            Thanh toán chuyển khoản ngân hàng, ví điện tử<br />
+            Quý khách vui lòng chuyển tiền vào tài khoản doanh nghiệp của alistyle.vn:<br />
+            <br />
+            898875522<br />
+            Công ty TNHH Alistyle<br />
+            Ngân hàng Thương mại Cổ phần Quân đội (MB Bank)<br />
+            Thanh toán khi nhận hàng (COD)<br />
+            Quý khách sẽ thanh toán bằng tiền mặt khi nhận hàng.<br />
+            <br />
+            Lưu ý: Để đem đến chất lượng dịch vụ tốt nhất cho những quý khách hàng thực sự có nhu cầu của Alistyle, chúng tôi xin phép chỉ ship COD toàn bộ đối với các đơn hàng dưới 1.000.000đ.
+            Đối với các đơn hàng có giá trị trên 2.000.000đ, quý khách hàng vui lòng chuyển khoản trước tối thiểu 1.000.000 vnđ. Phần còn lại của đơn hàng sẽ thanh toán cho đơn vị vận chuyển sau khi quý khách nhận và kiểm tra hàng.
+        </p> <br />
+        <h6>Chính sách đổi trả/Hoàn tiền</h6>
+        <p>
+            Bản tóm tắt trước khi đi vào chính sách cụ thể:<br />
+            + Quý khách sẽ được hỗ trợ đổi size, đổi mẫu trong vòng 15 ngày kể từ lúc nhận hàng.<br />
+            + Sau khi tiếp nhận thông tin sẽ có shipper qua tận nhà để đổi cho quý khách, không cần trực tiếp đi gửi ở bưu điện.<br />
+            + Quý khách có thể yêu cầu đổi size, đổi mẫu vì bất kì lí do gì (01 lần trên mỗi hóa đơn).<br />
+            + Sản phẩm hoàn lại phải còn nguyên vẹn, chưa qua sử dụng và sẽ được hỗ trợ đổi qua sản phẩm mới có giá trị tương đương hoặc lớn hơn giá trị sản phẩm cũ.<br />
+            <br />
+            I. QUY ĐỊNH CHUNG<br />
+            Áp dụng cho tất cả khách hàng đang sử dụng dịch vụ mua sắm tại website: https://alistyle.vn <br />
+            Áp dụng đối với các phương thức thanh toán tại website: https://alistyle.vn <br />
+            Áp dụng đổi trả với các sản phẩm nguyên giá (không giảm giá). <br />
+            Thời hạn đổi hàng: Trong vòng 15 ngày kể từ ngày Quý khách nhận được sản phẩm.<br />
+            Thời hạn trả hàng: Trong vòng 03 ngày kể từ ngày Quý khách nhận được sản phẩm.<br />
+            Các mặt hàng không áp dụng đổi/trả hàng:<br />
+            + Đồ lót, đồ bơi<br />
+            + Phụ kiện: Vớ, khăn, trang sức, shoescare, khẩu trang, túi, balo, mũ<br />
+            + Bearbrick<br /><br />
+            II. NỘI DUNG CHÍNH SÁCH ĐỔI TRẢ<br />
+            1. Mỗi sản phẩm chỉ được đổi trả 01 lần<br />
+            Trong trường hợp Quý khách đổi size giày hoặc quần áo nhưng sản phẩm không còn size, Alistyle sẽ hỗ trợ order với mức giá ở tại thời điểm đổi hàng hoặc hỗ trợ quý khách đổi sang sản phẩm khác tùy sở thích.
+            <br />
+            2. Giá trị sản phẩm đổi trả<br />
+            Bằng giá hoặc cao hơn giá trị thanh toán trên đơn hàng phát sinh nhu cầu đổi/trả của Quý khách (*Lưu ý: sẽ không bao gồm chi phí giao hàng), phần chênh lệch sau khi đổi sang sản phẩm có giá trị thấp hơn, Alistyle sẽ giữ lại dưới hình thức voucher trừ trực tiếp vào đơn hàng tiếp theo.
+            <br />
+            3. Quy định tiếp nhận hàng gửi trả<br />
+            Sau khi Alistyle thẩm định hàng hóa trả lại từ Quý khách, trong trường hợp sản phẩm không đáp ứng được các *điều kiện trả hàng (mục III.1), Alistyle sẽ từ chối giao dịch trả hàng này, CSKH sẽ liên hệ Quý khách về việc nhận lại sản phẩm hoặc CSKH sẽ hỗ trợ Quý khách chuyển sản phẩm trả lại theo địa chỉ của Quý khách (với trường hợp này, Quý khách sẽ thanh toán chi phí vận chuyển).
+                                              <br />
+            Trong trường hợp Quý khách không chấp nhận việc nhận lại sản phẩm, hoặc không thanh toán chi phí vận chuyển: Sản phẩm sẽ được hoàn về cho Alistyle theo địa chỉ gửi và Alistyle sẽ toàn quyền quyết định về sản phẩm này.
+                                              <br />
+            4. Trường hợp đổi trả<br />
+            Phát sinh lỗi từ phía Alistyle, Alistyle sẽ thanh toán chi phí vận chuyển đến khách hàng.<br />
+
+
+            Phát sinh từ nhu cầu của Quý khách, Quý khách sẽ thanh toán chi phí vận chuyển hàng hóa về lại cho Alistyle.
+                                                                                                     <br />
+            Nếu không phát sinh lỗi từ phía Alistyle, đơn hàng sẽ chỉ được hỗ trợ đổi mẫu, đổi size.
+            
+                                                                                                     <br /><br />III. QUY TRÌNH TIẾP NHẬN VÀ XỬ LÝ<br />
+            1. Điều kiện yêu cầu về tình trạng hàng hóa<br />
+            Sản phẩm chưa qua sử dụng, chưa qua giặt ủi/là, không có mùi lạ.<br />
+            Sản phẩm còn nguyên nhãn mác, hộp/bao bì sản phẩm đi kèm (nếu có).<br />
+            Sản phẩm không bị lỗi do quá trình lưu giữ, vận chuyển của người sử dụng.<br />
+            Khách hàng có chứng từ mua hàng đầy đủ tại Alistyle.<br />
+            2. Địa điểm nhận đổi trả<br />
+            CSKH khi tiếp nhận trường hợp đổi/trả sẽ gọi điện trực tiếp đến Quý khách về địa chỉ gửi trả hàng.<br />
+            Để được hỗ trợ nhanh và hướng dẫn cụ thể về địa chỉ đổi trả hàng, khách hàng vui lòng liên hệ số hotline: 089 887 5522. Nhân viên CSKH sẽ hỗ trợ ngay thông tin.<br />
+            Quý khách lưu ý khi nhân viên giao hàng Alistyle đến tiếp nhận đơn hàng hoàn:<br />
+            + Khách hàng cần đóng gói cẩn thận để đảm bảo hàng hóa không bị hư hỏng/móp méo hộp sản phẩm hoặc mất mát, thất lạc.<br />
+            + Khách hàng nên chụp ảnh sản phẩm, gói hàng trước khi chuyển phát đổi/trả về cho Alistyle. Việc lưu trữ hình ảnh sẽ góp phần giải quyết tốt hơn các vấn đề phát sinh trong quá trình đổi/trả qua dịch vụ chuyển phát.<br />
+            3. Quy trình thực hiện<br />
+            Bước 01: Liên hệ hotline 089 887 5522 hoặc fanpage Alistyle nếu Quý khách phát sinh nhu cầu đổi/trả.<br />
+            Bước 02: CSKH tiếp nhận hướng dẫn và hỗ trợ nhân viên qua tận nhà để nhận lại hàng hoàn từ phía quý khách.<br />
+            Bước 03: Xem xét tình trạng sản phẩm cần đổi/trả dựa trên *điều kiện trả hàng (mục III.1)<br />
+            Bước 04: Xác nhận việc đổi/trả<br />
+            Trường hợp chấp thuận đổi hàng: Khách hàng sẽ được tư vấn đổi lại size hoặc chọn sản phẩm mới trên website alistyle.vn.<br />
+            Trường hợp chấp thuận trả hàng: Khách hàng sẽ được hoàn tiền hoặc coupon tương ứng với số tiền đã thanh toán.<br />
+            Trường hợp không chấp thuẩn đổi/trả hàng: CSKH sẽ thông báo về tình trạng sản phẩm và tiến hành hoàn trả về cho Quý khách.<br />
+                                                                                                                                      <br />
+            IV. Chính sách hoàn tiền<br />
+            Sau khi 4 bước trong quy trình đổi trả hàng được thông qua. Những quý khách có sản phẩm đổi trả hợp lệ sẽ được hoàn tiền theo phương thức:<br />
+
+            Hoàn tiền qua tài khoản ngân hàng/Paypal/Ví điện tử do quý khách cung cấp trong vòng 24h, tất cả các ngày trong tuần.<br />
+        </p>
+
+    </div>
+</section>
+

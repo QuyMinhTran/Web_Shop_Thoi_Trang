@@ -1,0 +1,35 @@
+﻿@*@using WebBanHang.Models;
+@model List<Cart>
+@{
+    ViewBag.Title = "GioHang";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>THÔNG TIN GIỎ HÀNG </h2>
+<table align="center" border="1">
+    <tr style="text-align:center ; font-weight:bold">
+        <td>Mã Sản Phẩm </td>
+        <td>Tên Sản Phẩm </td>
+        <td>Hình Ảnh </td>
+        <td>Số Lượng  </td>
+        <td>Đơn Giá </td>
+        <td>Thành Tiền  </td>
+
+
+    </tr>
+    @foreach (var item in Model)
+    {
+        <td>@item.Id</td>
+        <td>@item.Name</td>
+        <td><img src="@item.Avatar" width="200wh" /></td>
+        <td>@item.Quantity</td>
+        <td>@String.Format("{0:0,0}", item.Price)</td>
+        <td>@String.Format("{0:0,0}", item.ThanhTien)</td>
+    }
+        <tr style="font-weight:bold; text-align:right; color:red">
+            <td colspan="3">Số Lượng Sản Phẩm: @ViewBag.TongSoLuong </td>
+            <td colspan="3">Tổng Tiền: @String.Format("{0:0,0}",  ViewBag.TongSoLuong) VNĐ </td>
+
+        </tr>
+</table>
+

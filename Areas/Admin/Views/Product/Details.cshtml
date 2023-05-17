@@ -1,0 +1,96 @@
+﻿@model WebBanHang.Models.Product
+@{
+    ViewBag.Title = "Details";
+}
+
+<div class="content-wrapper">
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <br />
+                <h2>Details Product</h2>
+
+                <div>
+
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Model.Id
+                        </dt>
+
+                        <dd>
+                            @Model.Id
+                        </dd>
+                        <dt>
+                           @Model.CategoryId
+                        </dt>
+
+                        <dd>
+                           @Model.CategoryId
+                        </dd>
+                        <dt>
+                            @Model.BrandID
+                        </dt>
+
+                        <dd>
+                            @Model.BrandID
+                        </dd>
+                        <dt>
+                            @Model.Name
+                        </dt>
+
+                        <dd>
+                            @Model.Name
+                        </dd>
+                        <dt>
+                            @Model.Avartar
+                        </dt>
+
+                        <dd>
+                            <img src="@Model.Avartar" width="100wh" />
+                        </dd>
+                        <dt>
+                            @Model.ShortDes
+                        </dt>
+
+                        <dd>
+                            @Model.ShortDes
+                        </dd>
+                        <dt>
+                            @Model.FullDescription
+                        </dt>
+
+                        <dd>
+                            @Model.FullDescription
+                        </dd>
+                        <dt>
+                            @Model.Price
+                        </dt>
+
+                        <dd>
+                            @Model.Price
+                        </dd>
+                        <dt>
+                            @Model.PriceDiscount
+                        </dt>
+
+                        <dd>
+                            @Model.PriceDiscount
+                        </dd>
+                        <div>
+                            <p>
+                                @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+
+                                <i class="fa fa-undo fa-fw"></i>@Html.ActionLink("Quay lại", "Index", "Product")
+
+                            </p>
+                        </div>
+                    </dl>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+
+
+

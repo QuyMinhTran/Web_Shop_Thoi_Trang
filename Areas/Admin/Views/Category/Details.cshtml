@@ -1,0 +1,47 @@
+﻿@model WebBanHang.Models.Category
+
+@{
+    ViewBag.Title = "Details";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+<div class="content-wrapper">
+    <section class="content">
+        <div class="container-fluid">
+            <div class="row">
+                <br />
+                <h2>Details Catrgory</h2>
+
+                <div>
+
+                    <hr />
+                    <dl class="dl-horizontal">
+                        <dt>
+                            @Model.Category_Name)
+                        </dt>
+
+                        <dd>
+                            @Model.Category_Name)
+                        </dd>
+
+                        <dt>
+                            @Model.ShowOnHomePage)
+                        </dt>
+
+                        <dd>
+                            @Model.ShowOnHomePage)
+                        </dd>
+                        <div>
+                            <p>
+                                @Html.ActionLink("Edit", "Edit", new { id = Model.Id }) |
+
+                                <i class="fa fa-undo fa-fw"></i>@Html.ActionLink("Quay lại", "Index", "Category")
+
+                            </p>
+                        </div>
+                    </dl>
+                </div>
+                </div>
+            </div>  
+        </section>
+    </div>
+                
